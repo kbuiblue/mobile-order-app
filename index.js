@@ -15,7 +15,7 @@ const itemsCart = []
 let totalPrice = 0
 
 function renderFood(food) {
-    const foodItem = `<div class="food-container">
+  const foodItem = `<div class="food-container">
                         <div class="food-option">
                         <img class="food-img" src="${food.src}">
                         <div class="food-info">
@@ -25,8 +25,8 @@ function renderFood(food) {
                       </div>
                       <button class="add-btn" data-id="${food.id}">+</button>
                       </div>`
-                      
-    foodList.innerHTML += foodItem
+
+  foodList.innerHTML += foodItem
 }
 
 function renderOrderItem(food, amount) {
@@ -51,22 +51,22 @@ function renderTotalPrice(totalPrice) {
 }
 
 function renderFoodBaseOnAmount(food) {
-    const orderItemEl = document.querySelector(`.order-item[data-id="${food.id}"]`);
-        
-        //render food type when amount is > 0 and vice versa
-        if (subtotalsAndAmounts.get(food.id).amount > 0) {
-        orderItemEl.style.display = "flex"; // Set display to 'flex' when amount is greater than 0
+  const orderItemEl = document.querySelector(`.order-item[data-id="${food.id}"]`);
 
-        // Update the food amount
-        const foodAmountEl = orderItemEl.querySelector(`.food-amount[data-id="${food.id}"]`);
-        foodAmountEl.textContent = subtotalsAndAmounts.get(food.id).amount;
-        
-        // Update the subtotal
-        const subtotalEl = orderItemEl.querySelector(`.subtotal[data-id="${food.id}"]`);
-        subtotalEl.textContent = `$${food.price * subtotalsAndAmounts.get(food.id).amount}`;
-        } else {
-          orderItemEl.style.display = "none";
-        }
+  //render food type when amount is > 0 and vice versa
+  if (subtotalsAndAmounts.get(food.id).amount > 0) {
+    orderItemEl.style.display = "flex"; // Set display to 'flex' when amount is greater than 0
+
+    // Update the food amount
+    const foodAmountEl = orderItemEl.querySelector(`.food-amount[data-id="${food.id}"]`);
+    foodAmountEl.textContent = subtotalsAndAmounts.get(food.id).amount;
+
+    // Update the subtotal
+    const subtotalEl = orderItemEl.querySelector(`.subtotal[data-id="${food.id}"]`);
+    subtotalEl.textContent = `$${food.price * subtotalsAndAmounts.get(food.id).amount}`;
+  } else {
+    orderItemEl.style.display = "none";
+  }
 }
 
 function renderCart(addClick) {
@@ -90,7 +90,7 @@ function renderCart(addClick) {
       } else {
         //the type of food has already been added
         let newSubtotal;
-        
+
         //check if button click is adding or subtracting items
         if (
           addClick.classList.contains("plus-btn") ||
@@ -107,7 +107,7 @@ function renderCart(addClick) {
         //update subtotal according to button click
         subtotalsAndAmounts.get(food.id).subtotal = newSubtotal;
         renderFoodBaseOnAmount(food)
-        
+
         //update order total
         orderTotal.innerHTML = renderTotalPrice(totalPrice);
         hideCartWhenAmountIsZero()
@@ -118,37 +118,37 @@ function renderCart(addClick) {
 }
 
 function hideCartWhenAmountIsZero() {
-    const itemsInCart = [...subtotalsAndAmounts.values()].some(
-          (item) => item.amount > 0
-        );
+  const itemsInCart = [...subtotalsAndAmounts.values()].some(
+    (item) => item.amount > 0
+  );
 
-    if (itemsInCart) {
-        orderSummary.style.visibility = "visible";
-    } else {
-        orderSummary.style.visibility = "hidden";
-    }
+  if (itemsInCart) {
+    orderSummary.style.visibility = "visible";
+  } else {
+    orderSummary.style.visibility = "hidden";
+  }
 }
 
-document.addEventListener("click", function(e){
-    if(e.target.dataset.id) {
-        renderCart(e.target)
-    } else if (e.target.id === "order-btn") {
-        paymentDetails.style.display = "flex"
-    }
+document.addEventListener("click", function (e) {
+  if (e.target.dataset.id) {
+    renderCart(e.target)
+  } else if (e.target.id === "order-btn") {
+    paymentDetails.style.display = "flex"
+  }
 })
 
-inputForm.addEventListener('submit', function(e){
-    e.preventDefault()
-    const inputFormData = new FormData(inputForm)
-    const customerName = inputFormData.get("name")
-    
-    paymentDetails.style.display = "none"
-    orderSummary.style.display = "none"
-    orderCompleted.style.display = "flex"
-    completedMsg.textContent = `Thanks, ${customerName}! Your order is on its way!`
-    
+inputForm.addEventListener('submit', function (e) {
+  e.preventDefault()
+  const inputFormData = new FormData(inputForm)
+  const customerName = inputFormData.get("name")
+
+  paymentDetails.style.display = "none"
+  orderSummary.style.display = "none"
+  orderCompleted.style.display = "flex"
+  completedMsg.textContent = `Thanks, ${customerName}! Your order is on its way!`
+
 })
 
-menuArray.forEach(function(food){
-    renderFood(food)
+menuArray.forEach(function (food) {
+  renderFood(food)
 })

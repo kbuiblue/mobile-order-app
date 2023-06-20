@@ -1,5 +1,5 @@
 export const menuArray = [
-    {   
+    {
         id: 0,
         name: "Pizza",
         ingredients: ["pepperoni", "mushrom", "mozarella"],
@@ -13,7 +13,7 @@ export const menuArray = [
         price: 12,
         src: "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",
     },
-        {
+    {
         id: 2,
         name: "Beer",
         ingredients: ["grain, hops, yeast, water"],
