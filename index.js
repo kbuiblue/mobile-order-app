@@ -134,7 +134,6 @@ document.addEventListener("click", function(e){
         renderCart(e.target)
     } else if (e.target.id === "order-btn") {
         paymentDetails.style.display = "flex"
-        // paymentDetails.style.position = "fixed"
     }
 })
 
