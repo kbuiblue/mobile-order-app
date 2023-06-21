@@ -1,5 +1,7 @@
 # Mobile Order App
 
+Live site: https://mobile-order-app.netlify.app/
+
 Quick start:
 
 ```
